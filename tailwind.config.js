@@ -1,14 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-const config = {
-  darkMode: 'media', // ou 'class' pour un dark mode activable via bouton
+module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-space-grotesk)'],
+        mono: ['var(--font-jetbrains-mono)'],
+      },
+    },
   },
   plugins: [],
-};
-
-export default config;
+}

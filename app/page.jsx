@@ -275,7 +275,7 @@ export default function Portfolio() {
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-cyan-700 transform rotate-6"></div>
                   <div className="relative w-full h-full overflow-hidden border-4 border-slate-950">
                     <img
-                      src="/images/omar_cv_pic.png"
+                      src="/images/omar_cv_pic.PNG"
                       alt="Omar Ben Fathallah"
                       className="w-full h-full object-center  transition-all duration-500"
                     />

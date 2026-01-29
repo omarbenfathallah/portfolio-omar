@@ -177,19 +177,18 @@ export default function Portfolio() {
         id="home"
         className="min-h-screen flex items-center justify-center relative px-6 md:px-8 pt-20"
       >
+        {/* Background effects */}
         <div className="absolute top-1/4 right-20 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-20 w-96 h-96 bg-cyan-800/5 rounded-full blur-3xl"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* Left column */}
+            {/* ================= LEFT COLUMN ================= */}
             <div className="space-y-6 md:space-y-8 opacity-0 animate-fadeInUp">
-              <div className="inline-block">
-                <span className="px-4 py-2 border border-yellow-500/30 rounded-full text-yellow-500 text-xs uppercase tracking-widest font-dm-sans inline-flex items-center gap-2">
-                  <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                  Disponible pour opportunités
-                </span>
-              </div>
+              <span className="px-4 py-2 border border-yellow-500/30 rounded-full text-yellow-500 text-xs uppercase tracking-widest font-dm-sans inline-flex items-center gap-2">
+                <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                Disponible pour opportunités
+              </span>
 
               <div>
                 <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-4">
@@ -197,6 +196,7 @@ export default function Portfolio() {
                   <br />
                   <span className="gradient-text">Ben Fathallah</span>
                 </h1>
+
                 <div className="flex items-center gap-4 mt-6">
                   <div className="h-px w-16 bg-yellow-500"></div>
                   <p className="font-cormorant text-xl md:text-2xl text-slate-300 italic">
@@ -211,7 +211,7 @@ export default function Portfolio() {
                 Boot, Angular, ReactJS et DevOps.
               </p>
 
-              {/* Key highlights */}
+              {/* Highlights */}
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="flex items-center gap-2 text-sm text-slate-400">
                   <Calendar className="w-4 h-4 text-yellow-500" />
@@ -223,32 +223,36 @@ export default function Portfolio() {
                 </div>
               </div>
 
+              {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <a
-                   href="https://mail.google.com/mail/?view=cm&fs=1&to=benfathallah.omar@gmail.com&su=Contact%20depuis%20portfolio&body=Bonjour%20Omar,"
-                  className="group px-6 md:px-8 py-3 md:py-4 bg-yellow-500 text-slate-950 font-dm-sans font-semibold rounded-none hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base cursor-pointer"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=benfathallah.omar@gmail.com&su=Contact%20depuis%20portfolio&body=Bonjour%20Omar,"
+                  className="group px-6 md:px-8 py-3 md:py-4 bg-yellow-500 text-slate-950 font-dm-sans font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <Mail className="w-4 md:w-5 h-4 md:h-5" />
+                  <Mail className="w-5 h-5" />
                   Me Contacter
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
+
                 <a
-                  href="#"
-                  className="group px-6 md:px-8 py-3 md:py-4 border border-slate-700 font-dm-sans font-semibold rounded-none hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 flex items-center justify-center gap-2 text-sm md:text-base"
+                  href="/cv/CV_Omar_Ben_Fathallah.pdf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group px-6 md:px-8 py-3 md:py-4 border border-slate-700 font-dm-sans font-semibold hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Télécharger CV
                 </a>
               </div>
 
-              {/* Social links - mobile optimized */}
+              {/* Socials */}
               <div className="flex gap-3 pt-2">
                 <a
                   href="https://linkedin.com/in/ben-fathallah-omar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300"
-                  aria-label="LinkedIn"
+                  className="p-2.5 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
@@ -256,31 +260,52 @@ export default function Portfolio() {
                   href="https://github.com/omarbenfathallah"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300"
-                  aria-label="GitHub"
+                  className="p-2.5 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all"
                 >
                   <Github className="w-4 h-4" />
                 </a>
               </div>
             </div>
 
-            {/* Right column - Contact card */}
+            {/* ================= RIGHT COLUMN ================= */}
             <div className="space-y-6 opacity-0 animate-fadeInUp stagger-2">
-              <div className="glass rounded-none p-6 md:p-8 space-y-6 hover-lift">
-                <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-6">
-                  Contact
-                </h3>
+              {/* Photo */}
+              <div className="glass p-6 md:p-8 hover-lift">
+                <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-cyan-700 transform rotate-6"></div>
+                  <div className="relative w-full h-full overflow-hidden border-4 border-slate-950">
+                    <img
+                      src="/images/omar_cv_pic.png"
+                      alt="Omar Ben Fathallah"
+                      className="w-full h-full object-center  transition-all duration-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <h3 className="font-playfair text-2xl font-bold text-slate-100">
+                    Omar Ben Fathallah
+                  </h3>
+                  <p className="text-yellow-500 font-dm-sans text-sm mt-2">
+                    Ingénieur Génie Logiciel · Full-Stack
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact Card */}
+              <div className="glass p-6 md:p-8 space-y-6 hover-lift">
+                <h3 className="font-playfair text-2xl font-bold">Contact</h3>
 
                 <a
-                   href="https://mail.google.com/mail/?view=cm&fs=1&to=benfathallah.omar@gmail.com&su=Contact%20depuis%20portfolio&body=Bonjour%20Omar,"
-                  className="flex items-start gap-3 md:gap-4 group cursor-pointer"
+                  href="mailto:benfathallah.omar@gmail.com"
+                  className="flex items-start gap-4 group"
                 >
-                  <Mail className="w-5 md:w-6 h-5 md:h-6 text-yellow-500 mt-1 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <div className="text-xs md:text-sm text-slate-500 uppercase tracking-wider font-dm-sans">
+                  <Mail className="w-6 h-6 text-yellow-500" />
+                  <div>
+                    <div className="text-xs text-slate-500 uppercase">
                       Email
                     </div>
-                    <div className="text-sm md:text-base text-slate-200 group-hover:text-yellow-500 transition-colors break-all">
+                    <div className="text-slate-200 group-hover:text-yellow-500">
                       benfathallah.omar@gmail.com
                     </div>
                   </div>
@@ -288,51 +313,26 @@ export default function Portfolio() {
 
                 <a
                   href="tel:+21627351545"
-                  className="flex items-start gap-3 md:gap-4 group"
+                  className="flex items-start gap-4 group"
                 >
-                  <Phone className="w-5 md:w-6 h-5 md:h-6 text-yellow-500 mt-1 flex-shrink-0" />
+                  <Phone className="w-6 h-6 text-yellow-500" />
                   <div>
-                    <div className="text-xs md:text-sm text-slate-500 uppercase tracking-wider font-dm-sans">
+                    <div className="text-xs text-slate-500 uppercase">
                       Téléphone
                     </div>
-                    <div className="text-sm md:text-base text-slate-200 group-hover:text-yellow-500 transition-colors">
+                    <div className="text-slate-200 group-hover:text-yellow-500">
                       +216 27 351 545
                     </div>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-3 md:gap-4">
-                  <MapPin className="w-5 md:w-6 h-5 md:h-6 text-yellow-500 mt-1 flex-shrink-0" />
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-6 h-6 text-yellow-500" />
                   <div>
-                    <div className="text-xs md:text-sm text-slate-500 uppercase tracking-wider font-dm-sans">
+                    <div className="text-xs text-slate-500 uppercase">
                       Localisation
                     </div>
-                    <div className="text-sm md:text-base text-slate-200">
-                      El Aouina, Tunisie
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-800">
-                  <div className="flex gap-3 md:gap-4">
-                    <a
-                      href="https://linkedin.com/in/ben-fathallah-omar"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 md:p-3 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300 flex-1 flex items-center justify-center"
-                      aria-label="LinkedIn profile"
-                    >
-                      <Linkedin className="w-4 md:w-5 h-4 md:h-5" />
-                    </a>
-                    <a
-                      href="https://github.com/omarbenfathallah"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 md:p-3 border border-slate-700 hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300 flex-1 flex items-center justify-center"
-                      aria-label="GitHub profile"
-                    >
-                      <Github className="w-4 md:w-5 h-4 md:h-5" />
-                    </a>
+                    <div className="text-slate-200">El Aouina, Tunisie</div>
                   </div>
                 </div>
               </div>
@@ -340,11 +340,12 @@ export default function Portfolio() {
           </div>
         </div>
 
+        {/* Scroll indicator */}
         <div
-          className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
           onClick={() => scrollToSection("about")}
         >
-          <ChevronDown className="w-6 md:w-8 h-6 md:h-8 text-yellow-500" />
+          <ChevronDown className="w-8 h-8 text-yellow-500" />
         </div>
       </section>
 

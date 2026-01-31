@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import {
   Github,
@@ -14,21 +13,23 @@ import {
   Code,
   GraduationCap,
   Download,
-  ExternalLink,
   Calendar,
-  Users,
 } from "lucide-react";
+import { useLanguage } from "./contexts/LanguageContext";
+import { translations } from "./translations/translation";
+import LanguageToggle from "./components/LanguageToggle";
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
       const sections = [
         "home",
         "about",
@@ -45,7 +46,6 @@ export default function Portfolio() {
         }
         return false;
       });
-
       if (current) setActiveSection(current);
     };
 
@@ -97,15 +97,8 @@ export default function Portfolio() {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex gap-10 font-dm-sans text-sm uppercase tracking-widest">
-            {[
-              "home",
-              "about",
-              "experience",
-              "projects",
-              "skills",
-              "contact",
-            ].map((section) => (
+          <div className="hidden md:flex gap-10 font-dm-sans text-sm uppercase tracking-widest items-center">
+            {Object.values(t.nav).map((section, index) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -121,40 +114,37 @@ export default function Portfolio() {
                 )}
               </button>
             ))}
+            <LanguageToggle />
           </div>
 
           {/* Mobile menu button */}
-          <button
-            className="md:hidden text-slate-100 p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`}
-              ></span>
-              <span
-                className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "opacity-0" : ""}`}
-              ></span>
-              <span
-                className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-              ></span>
-            </div>
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageToggle />
+            <button
+              className="text-slate-100 p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="w-6 h-5 flex flex-col justify-between">
+                <span
+                  className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`}
+                ></span>
+                <span
+                  className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "opacity-0" : ""}`}
+                ></span>
+                <span
+                  className={`block h-0.5 w-full bg-current transition-all ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+                ></span>
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-slate-950/98 backdrop-blur-xl border-b border-slate-800">
             <div className="px-6 py-4 space-y-3">
-              {[
-                "home",
-                "about",
-                "experience",
-                "projects",
-                "skills",
-                "contact",
-              ].map((section) => (
+              {Object.values(t.nav).map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -172,54 +162,50 @@ export default function Portfolio() {
         )}
       </nav>
 
-      {/* Hero Section - Enhanced */}
+      {/* Hero Section */}
       <section
         id="home"
         className="min-h-screen flex items-center justify-center relative px-6 md:px-8 pt-20"
       >
-        {/* Background effects */}
         <div className="absolute top-1/4 right-20 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-20 w-96 h-96 bg-cyan-800/5 rounded-full blur-3xl"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* ================= LEFT COLUMN ================= */}
+            {/* LEFT COLUMN */}
             <div className="space-y-6 md:space-y-8 opacity-0 animate-fadeInUp">
               <span className="px-4 py-2 border border-yellow-500/30 rounded-full text-yellow-500 text-xs uppercase tracking-widest font-dm-sans inline-flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                Disponible pour opportunités
+                {t.hero.available}
               </span>
 
               <div>
                 <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-4">
-                  Omar
+                  {t.hero.name}
                   <br />
-                  <span className="gradient-text">Ben Fathallah</span>
+                  <span className="gradient-text">{t.hero.surname}</span>
                 </h1>
-
                 <div className="flex items-center gap-4 mt-6">
                   <div className="h-px w-16 bg-yellow-500"></div>
                   <p className="font-cormorant text-xl md:text-2xl text-slate-300 italic">
-                    Ingénieur en Génie Logiciel
+                    {t.hero.title}
                   </p>
                 </div>
               </div>
 
               <p className="text-base md:text-lg text-slate-400 leading-relaxed max-w-lg font-dm-sans">
-                Développeur Full-Stack passionné par l&apos;architecture des
-                systèmes et les technologies modernes. Spécialisé en Spring
-                Boot, Angular, ReactJS et DevOps.
+                {t.hero.description}
               </p>
 
               {/* Highlights */}
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="flex items-center gap-2 text-sm text-slate-400">
                   <Calendar className="w-4 h-4 text-yellow-500" />
-                  <span>3+ ans d&apos;études</span>
+                  <span>{t.hero.yearsStudy}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-slate-400">
                   <Briefcase className="w-4 h-4 text-yellow-500" />
-                  <span>3 stages pro</span>
+                  <span>{t.hero.internships}</span>
                 </div>
               </div>
 
@@ -230,10 +216,9 @@ export default function Portfolio() {
                   className="group px-6 md:px-8 py-3 md:py-4 bg-yellow-500 text-slate-950 font-dm-sans font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Mail className="w-5 h-5" />
-                  Me Contacter
+                  {t.hero.contactMe}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
-
                 <a
                   href="/cv/CV_Omar_Ben_Fathallah.pdf"
                   download
@@ -242,7 +227,7 @@ export default function Portfolio() {
                   className="group px-6 md:px-8 py-3 md:py-4 border border-slate-700 font-dm-sans font-semibold hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Download className="w-4 h-4" />
-                  Télécharger CV
+                  {t.hero.downloadCV}
                 </a>
               </div>
 
@@ -267,7 +252,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* ================= RIGHT COLUMN ================= */}
+            {/* RIGHT COLUMN */}
             <div className="space-y-6 opacity-0 animate-fadeInUp stagger-2">
               {/* Photo */}
               <div className="glass p-6 md:p-8 hover-lift">
@@ -277,25 +262,25 @@ export default function Portfolio() {
                     <img
                       src="/images/omar_cv_pic.PNG"
                       alt="Omar Ben Fathallah"
-                      className="w-full h-full object-center  transition-all duration-500"
+                      className="w-full h-full object-center transition-all duration-500"
                     />
                   </div>
                 </div>
-
                 <div className="text-center">
                   <h3 className="font-playfair text-2xl font-bold text-slate-100">
-                    Omar Ben Fathallah
+                    {t.hero.name} {t.hero.surname}
                   </h3>
                   <p className="text-yellow-500 font-dm-sans text-sm mt-2">
-                    Ingénieur Génie Logiciel · Full-Stack
+                    {t.hero.title}
                   </p>
                 </div>
               </div>
 
               {/* Contact Card */}
               <div className="glass p-6 md:p-8 space-y-6 hover-lift">
-                <h3 className="font-playfair text-2xl font-bold">Contact</h3>
-
+                <h3 className="font-playfair text-2xl font-bold">
+                  {t.hero.contact}
+                </h3>
                 <a
                   href="mailto:benfathallah.omar@gmail.com"
                   className="flex items-start gap-4 group"
@@ -303,14 +288,13 @@ export default function Portfolio() {
                   <Mail className="w-6 h-6 text-yellow-500" />
                   <div>
                     <div className="text-xs text-slate-500 uppercase">
-                      Email
+                      {t.hero.email}
                     </div>
                     <div className="text-slate-200 group-hover:text-yellow-500">
                       benfathallah.omar@gmail.com
                     </div>
                   </div>
                 </a>
-
                 <a
                   href="tel:+21627351545"
                   className="flex items-start gap-4 group"
@@ -318,21 +302,20 @@ export default function Portfolio() {
                   <Phone className="w-6 h-6 text-yellow-500" />
                   <div>
                     <div className="text-xs text-slate-500 uppercase">
-                      Téléphone
+                      {t.hero.phone}
                     </div>
                     <div className="text-slate-200 group-hover:text-yellow-500">
                       +216 27 351 545
                     </div>
                   </div>
                 </a>
-
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-yellow-500" />
                   <div>
                     <div className="text-xs text-slate-500 uppercase">
-                      Localisation
+                      {t.hero.location}
                     </div>
-                    <div className="text-slate-200">El Aouina, Tunisie</div>
+                    <div className="text-slate-200">{t.hero.locationValue}</div>
                   </div>
                 </div>
               </div>
@@ -349,15 +332,15 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* About Section - Enhanced */}
+      {/* About Section */}
       <section id="about" className="py-20 md:py-32 px-6 md:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 md:mb-20">
             <span className="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-dm-sans">
-              À Propos
+              {t.about.sectionTitle}
             </span>
             <h2 className="font-playfair text-4xl md:text-6xl font-black mt-4 mb-6">
-              Qui suis-je ?
+              {t.about.title}
             </h2>
             <div className="h-1 w-20 md:w-24 bg-yellow-500"></div>
           </div>
@@ -367,27 +350,21 @@ export default function Portfolio() {
             <div className="lg:col-span-3 space-y-6">
               <div className="prose prose-invert prose-lg max-w-none">
                 <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-cormorant">
-                  Diplômé en Génie Logiciel (août 2025) à ESPRIT, je suis
-                  passionné par le développement logiciel et l&apos;architecture
-                  des systèmes. Je possède une solide expérience en
-                  développement full-stack avec Spring Boot, Angular et ReactJS.
+                  {t.about.description1}
                 </p>
                 <p className="text-base md:text-lg text-slate-400 leading-relaxed font-dm-sans">
-                  Je maîtrise les environnements DevOps incluant Docker, CI/CD,
-                  GitHub Actions et les bonnes pratiques d&apos;architecture
-                  microservices. Curieux, rigoureux et orienté résultats, je
-                  conçois des solutions performantes et évolutives.
+                  {t.about.description2}
                 </p>
               </div>
 
-              {/* Stats - Mobile optimized */}
+              {/* Stats */}
               <div className="grid grid-cols-3 gap-4 md:gap-6 pt-8">
                 <div className="text-center">
                   <div className="text-3xl md:text-4xl font-playfair font-bold text-yellow-500">
                     3+
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 mt-2 font-dm-sans uppercase tracking-wider">
-                    Années d&apos;études
+                    {t.about.yearsStudy}
                   </div>
                 </div>
                 <div className="text-center border-x border-slate-800">
@@ -395,7 +372,7 @@ export default function Portfolio() {
                     10+
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 mt-2 font-dm-sans uppercase tracking-wider">
-                    Projets réalisés
+                    {t.about.completedProjects}
                   </div>
                 </div>
                 <div className="text-center">
@@ -403,7 +380,7 @@ export default function Portfolio() {
                     3
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 mt-2 font-dm-sans uppercase tracking-wider">
-                    Stages pro
+                    {t.about.internships}
                   </div>
                 </div>
               </div>
@@ -415,28 +392,30 @@ export default function Portfolio() {
                 <div className="flex items-center gap-3 mb-6">
                   <GraduationCap className="w-5 md:w-6 h-5 md:h-6 text-yellow-500" />
                   <h3 className="font-playfair text-xl md:text-2xl font-bold">
-                    Formation
+                    {t.about.education}
                   </h3>
                 </div>
                 <div className="space-y-6">
                   <div className="border-l-2 border-yellow-500 pl-4">
                     <div className="font-dm-sans font-semibold text-sm md:text-base text-slate-200">
-                      Diplôme National d&apos;Ingénieur
+                      {t.about.degree}
                     </div>
-                    <div className="text-sm text-slate-400 mt-1">ESPRIT</div>
+                    <div className="text-sm text-slate-400 mt-1">
+                      {t.about.university}
+                    </div>
                     <div className="text-xs text-slate-500 mt-1">
-                      2022 - 2025 • Génie Logiciel
+                      {t.about.period}
                     </div>
                   </div>
                   <div className="border-l-2 border-slate-700 pl-4">
                     <div className="font-dm-sans font-semibold text-sm md:text-base text-slate-200">
-                      Licence en Technologie
+                      {t.about.license}
                     </div>
                     <div className="text-sm text-slate-400 mt-1">
-                      ISET Siliana
+                      {t.about.university2}
                     </div>
                     <div className="text-xs text-slate-500 mt-1">
-                      2019 - 2022
+                      {t.about.period2}
                     </div>
                   </div>
                 </div>
@@ -446,17 +425,17 @@ export default function Portfolio() {
                 <div className="flex items-center gap-3 mb-6">
                   <Award className="w-5 md:w-6 h-5 md:h-6 text-yellow-500" />
                   <h3 className="font-playfair text-xl md:text-2xl font-bold">
-                    Langues
+                    {t.about.languages}
                   </h3>
                 </div>
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between mb-2">
                       <span className="text-sm md:text-base text-slate-300 font-dm-sans">
-                        Français
+                        {t.about.french}
                       </span>
                       <span className="text-xs text-yellow-500 uppercase tracking-wider">
-                        Professionnel
+                        {t.about.levelProfessional}
                       </span>
                     </div>
                     <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -466,10 +445,10 @@ export default function Portfolio() {
                   <div>
                     <div className="flex justify-between mb-2">
                       <span className="text-sm md:text-base text-slate-300 font-dm-sans">
-                        Anglais
+                        {t.about.english}
                       </span>
                       <span className="text-xs text-yellow-500 uppercase tracking-wider">
-                        Intermédiaire
+                        {t.about.levelIntermediate}
                       </span>
                     </div>
                     <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -479,10 +458,10 @@ export default function Portfolio() {
                   <div>
                     <div className="flex justify-between mb-2">
                       <span className="text-sm md:text-base text-slate-300 font-dm-sans">
-                        Arabe
+                        {t.about.arabic}
                       </span>
                       <span className="text-xs text-yellow-500 uppercase tracking-wider">
-                        Maternel
+                        {t.about.levelNative}
                       </span>
                     </div>
                     <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -504,10 +483,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 md:mb-20">
             <span className="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-dm-sans">
-              Parcours
+              {t.experience.sectionTitle}
             </span>
             <h2 className="font-playfair text-4xl md:text-6xl font-black mt-4 mb-6">
-              Expériences Professionnelles
+              {t.experience.title}
             </h2>
             <div className="h-1 w-20 md:w-24 bg-yellow-500"></div>
           </div>
@@ -518,16 +497,16 @@ export default function Portfolio() {
               <div className="lg:col-span-4">
                 <div className="lg:sticky lg:top-32">
                   <div className="text-xs md:text-sm text-yellow-500 uppercase tracking-widest font-dm-sans mb-2">
-                    Déc. 2024 - Juin 2025
+                    {t.experience.exp1.period}
                   </div>
                   <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3">
-                    Stage de fin d&apos;études
+                    {t.experience.exp1.title}
                   </h3>
                   <p className="text-lg md:text-xl text-slate-400">
-                    Sharing Technologies
+                    {t.experience.exp1.company}
                   </p>
                   <p className="text-sm md:text-base text-slate-500 mt-1">
-                    BH Bank
+                    {t.experience.exp1.client}
                   </p>
                 </div>
               </div>
@@ -536,24 +515,15 @@ export default function Portfolio() {
                   <ul className="space-y-3 md:space-y-4 text-sm md:text-base text-slate-300 font-dm-sans">
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-yellow-500 mt-1 flex-shrink-0" />
-                      <span>
-                        Développement complet d&apos;une application web de
-                        gestion électronique des documents (GED)
-                      </span>
+                      <span>{t.experience.exp1.task1}</span>
                     </li>
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-yellow-500 mt-1 flex-shrink-0" />
-                      <span>
-                        Intégration à la GED existante (Alfresco) via le
-                        protocole CMIS
-                      </span>
+                      <span>{t.experience.exp1.task2}</span>
                     </li>
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-yellow-500 mt-1 flex-shrink-0" />
-                      <span>
-                        Mise en place d&apos;une base de données dynamique avec
-                        gestion automatisée via interface admin
-                      </span>
+                      <span>{t.experience.exp1.task3}</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
@@ -583,16 +553,16 @@ export default function Portfolio() {
               <div className="lg:col-span-4">
                 <div className="lg:sticky lg:top-32">
                   <div className="text-xs md:text-sm text-yellow-500 uppercase tracking-widest font-dm-sans mb-2">
-                    Juil. 2024 - Août 2024
+                    {t.experience.exp2.period}
                   </div>
                   <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3">
-                    Stage d&apos;été
+                    {t.experience.exp2.title}
                   </h3>
                   <p className="text-lg md:text-xl text-slate-400">
-                    Sharing Technologies
+                    {t.experience.exp2.company}
                   </p>
                   <p className="text-sm md:text-base text-slate-500 mt-1">
-                    Tunisair
+                    {t.experience.exp2.client}
                   </p>
                 </div>
               </div>
@@ -601,17 +571,11 @@ export default function Portfolio() {
                   <ul className="space-y-3 md:space-y-4 text-sm md:text-base text-slate-300 font-dm-sans">
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-cyan-500 mt-1 flex-shrink-0" />
-                      <span>
-                        Développement d&apos;une application de gestion des
-                        opérations de maintenance des avions
-                      </span>
+                      <span>{t.experience.exp2.task1}</span>
                     </li>
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-cyan-500 mt-1 flex-shrink-0" />
-                      <span>
-                        Suivi des enregistrements et génération de rapports
-                        techniques
-                      </span>
+                      <span>{t.experience.exp2.task2}</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
@@ -635,14 +599,16 @@ export default function Portfolio() {
               <div className="lg:col-span-4">
                 <div className="lg:sticky lg:top-32">
                   <div className="text-xs md:text-sm text-yellow-500 uppercase tracking-widest font-dm-sans mb-2">
-                    Juil. 2023 - Août 2023
+                    {t.experience.exp3.period}
                   </div>
                   <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3">
-                    Stage d&apos;immersion
+                    {t.experience.exp3.title}
                   </h3>
-                  <p className="text-lg md:text-xl text-slate-400">ESPRIT</p>
+                  <p className="text-lg md:text-xl text-slate-400">
+                    {t.experience.exp3.company}
+                  </p>
                   <p className="text-sm md:text-base text-slate-500 mt-1">
-                    Département SI
+                    {t.experience.exp3.client}
                   </p>
                 </div>
               </div>
@@ -651,16 +617,11 @@ export default function Portfolio() {
                   <ul className="space-y-3 md:space-y-4 text-sm md:text-base text-slate-300 font-dm-sans">
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-slate-400 mt-1 flex-shrink-0" />
-                      <span>
-                        Conception et implémentation des fonctionnalités CRUD
-                      </span>
+                      <span>{t.experience.exp3.task1}</span>
                     </li>
                     <li className="flex gap-3 md:gap-4">
                       <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-slate-400 mt-1 flex-shrink-0" />
-                      <span>
-                        Développement du back-office pour une gestion efficace
-                        des données
-                      </span>
+                      <span>{t.experience.exp3.task2}</span>
                     </li>
                   </ul>
                   <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
@@ -685,10 +646,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 md:mb-20">
             <span className="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-dm-sans">
-              Réalisations
+              {t.projects.sectionTitle}
             </span>
             <h2 className="font-playfair text-4xl md:text-6xl font-black mt-4 mb-6">
-              Projets Sélectionnés
+              {t.projects.title}
             </h2>
             <div className="h-1 w-20 md:w-24 bg-yellow-500"></div>
           </div>
@@ -703,25 +664,23 @@ export default function Portfolio() {
                 <Briefcase className="w-6 md:w-8 h-6 md:h-8 text-yellow-500 opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
               <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-yellow-500 transition-colors">
-                Projet DevOps CI/CD
+                {t.projects.project1.title}
               </h3>
               <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
-                Architecture Microservices • ESPRIT 2024
+                {t.projects.project1.subtitle}
               </p>
               <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-yellow-500">→</span>
-                  <span>
-                    Pipeline CI/CD automatisant build, tests et déploiement
-                  </span>
+                  <span>{t.projects.project1.task1}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-yellow-500">→</span>
-                  <span>Containerisation avec Docker et orchestration</span>
+                  <span>{t.projects.project1.task2}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-yellow-500">→</span>
-                  <span>Supervision avec Grafana et Prometheus</span>
+                  <span>{t.projects.project1.task3}</span>
                 </li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
@@ -751,21 +710,19 @@ export default function Portfolio() {
                 <Code className="w-6 md:w-8 h-6 md:h-8 text-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
               <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-cyan-500 transition-colors">
-                Plateforme de gestion des stages
+                {t.projects.project2.title}
               </h3>
               <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
-                ESPRIT 2024
+                {t.projects.project2.subtitle}
               </p>
               <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-cyan-500">→</span>
-                  <span>
-                    Gestion complète des utilisateurs avec opérations CRUD
-                  </span>
+                  <span>{t.projects.project2.task1}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-cyan-500">→</span>
-                  <span>Spring Security pour la gestion avancée des accès</span>
+                  <span>{t.projects.project2.task2}</span>
                 </li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
@@ -795,21 +752,19 @@ export default function Portfolio() {
                 <Code className="w-6 md:w-8 h-6 md:h-8 text-purple-500 opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
               <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-purple-500 transition-colors">
-                Attack Of Zombie
+                {t.projects.project3.title}
               </h3>
               <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
-                Jeu Mobile 3D • CGI Studio 2022
+                {t.projects.project3.subtitle}
               </p>
               <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-purple-500">→</span>
-                  <span>
-                    Conception et développement d&apos;un jeu mobile 3D immersif
-                  </span>
+                  <span>{t.projects.project3.task1}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-purple-500">→</span>
-                  <span>Modélisation 3D et gameplay</span>
+                  <span>{t.projects.project3.task2}</span>
                 </li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
@@ -833,23 +788,19 @@ export default function Portfolio() {
                 <Code className="w-6 md:w-8 h-6 md:h-8 text-green-500 opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
               <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-green-500 transition-colors">
-                Projet de recyclage municipal
+                {t.projects.project4.title}
               </h3>
               <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
-                ESPRIT 2023
+                {t.projects.project4.subtitle}
               </p>
               <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-green-500">→</span>
-                  <span>
-                    Gestion des offres et achats pour projet de recyclage
-                  </span>
+                  <span>{t.projects.project4.task1}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
                   <span className="text-green-500">→</span>
-                  <span>
-                    Interfaces conviviales avec JavaFX et Scene Builder
-                  </span>
+                  <span>{t.projects.project4.task2}</span>
                 </li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
@@ -875,10 +826,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 md:mb-20">
             <span className="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-dm-sans">
-              Expertise
+              {t.skills.sectionTitle}
             </span>
             <h2 className="font-playfair text-4xl md:text-6xl font-black mt-4 mb-6">
-              Compétences Techniques
+              {t.skills.title}
             </h2>
             <div className="h-1 w-20 md:w-24 bg-yellow-500"></div>
           </div>
@@ -887,7 +838,7 @@ export default function Portfolio() {
             {/* Frontend */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-yellow-500">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-yellow-500">
-                Frontend
+                {t.skills.frontend}
               </h3>
               <div className="space-y-3">
                 {[
@@ -914,7 +865,7 @@ export default function Portfolio() {
             {/* Backend */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-cyan-700">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-cyan-500">
-                Backend
+                {t.skills.backend}
               </h3>
               <div className="space-y-3">
                 {[
@@ -943,7 +894,7 @@ export default function Portfolio() {
             {/* Databases */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-purple-700">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-purple-500">
-                Bases de données
+                {t.skills.databases}
               </h3>
               <div className="space-y-3">
                 {["MySQL", "PostgreSQL", "MongoDB"].map((skill) => (
@@ -963,7 +914,7 @@ export default function Portfolio() {
             {/* DevOps */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-green-700">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-green-500">
-                DevOps & Architecture
+                {t.skills.devops}
               </h3>
               <div className="space-y-3">
                 {[
@@ -989,7 +940,7 @@ export default function Portfolio() {
             {/* Tests */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-orange-700">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-orange-500">
-                Tests & Qualité
+                {t.skills.testing}
               </h3>
               <div className="space-y-3">
                 {["JUnit", "Mockito", "Postman", "Tests unitaires"].map(
@@ -1011,7 +962,7 @@ export default function Portfolio() {
             {/* Tools */}
             <div className="glass rounded-none p-6 md:p-8 border-l-4 border-pink-700">
               <h3 className="font-playfair text-xl md:text-2xl font-bold mb-6 text-pink-500">
-                Outils & Méthodologies
+                {t.skills.tools}
               </h3>
               <div className="space-y-3">
                 {["Git", "GitHub", "Jira", "Trello", "Agile/Scrum"].map(
@@ -1038,17 +989,16 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-12 md:mb-20">
             <span className="text-xs md:text-sm uppercase tracking-widest text-yellow-500 font-dm-sans">
-              Contact
+              {t.contact.sectionTitle}
             </span>
             <h2 className="font-playfair text-4xl md:text-6xl font-black mt-4 mb-6">
-              Travaillons Ensemble
+              {t.contact.title}
             </h2>
             <div className="h-1 w-20 md:w-24 bg-yellow-500 mx-auto"></div>
           </div>
 
           <p className="text-lg md:text-2xl text-slate-300 mb-12 md:mb-16 max-w-2xl mx-auto font-cormorant italic">
-            Intéressé par mon profil ? N&apos;hésitez pas à me contacter pour
-            discuter de vos projets.
+            {t.contact.description}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
@@ -1057,7 +1007,7 @@ export default function Portfolio() {
               className="group px-8 md:px-10 py-4 md:py-5 bg-yellow-500 text-slate-950 font-dm-sans font-bold rounded-none hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center gap-3 text-sm md:text-base cursor-pointer"
             >
               <Mail className="w-5 md:w-6 h-5 md:h-6" />
-              Envoyer un Email
+              {t.contact.sendEmail}
               <ArrowRight className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
@@ -1067,7 +1017,7 @@ export default function Portfolio() {
               className="px-8 md:px-10 py-4 md:py-5 border-2 border-slate-700 font-dm-sans font-bold rounded-none hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300 flex items-center justify-center gap-3 text-sm md:text-base"
             >
               <Github className="w-5 md:w-6 h-5 md:h-6" />
-              Voir mon GitHub
+              {t.contact.viewGithub}
             </a>
           </div>
         </div>
@@ -1082,7 +1032,7 @@ export default function Portfolio() {
               <span className="text-slate-100">BF</span>
             </div>
             <div className="text-slate-500 font-dm-sans text-xs md:text-sm text-center">
-              &copy; 2025 Omar Ben Fathallah. Tous droits réservés.
+              &copy; 2025 Omar Ben Fathallah. {t.footer.rights}
             </div>
             <div className="flex gap-4 md:gap-6">
               <a

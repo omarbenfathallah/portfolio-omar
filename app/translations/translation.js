@@ -18,7 +18,7 @@ export const translations = {
       description:
         "Développeur Full-Stack passionné par l'architecture des systèmes et les technologies modernes. Spécialisé en Spring Boot, Angular, ReactJS et DevOps.",
       yearsStudy: "3+ ans d'études",
-      internships: "3 stages pro",
+      internships: "4 stages pro",
       contactMe: "Me Contacter",
       downloadCV: "Télécharger CV",
       contact: "Contact",
@@ -87,11 +87,20 @@ export const translations = {
         task2:
           "Développement du back-office pour une gestion efficace des données",
       },
+      exp4: {
+        period: "Fév. 2022 - Juin 2022",
+        title: "Stage de fin d'études (Licence)",
+        company: "CGI Studio",
+        client: "CGI Studio",
+        task1: "Conçu et développé 'Attack Of Zombie', un jeu mobile 3D immersif",
+        task2: "Modélisation 3D des personnages et environnements",
+        task3: "Implémentation du gameplay et des mécaniques de jeu",
+      },
     },
     // Projects Section
     projects: {
       sectionTitle: "Réalisations",
-      title: "Projets Sélectionnés",
+      title: "Projets Académiques",
       project1: {
         title: "Projet DevOps CI/CD",
         subtitle: "Architecture Microservices • ESPRIT 2024",
@@ -106,12 +115,6 @@ export const translations = {
         task2: "Spring Security pour la gestion avancée des accès",
       },
       project3: {
-        title: "Attack Of Zombie",
-        subtitle: "Jeu Mobile 3D • CGI Studio 2022",
-        task1: "Conception et développement d'un jeu mobile 3D immersif",
-        task2: "Modélisation 3D et gameplay",
-      },
-      project4: {
         title: "Projet de recyclage municipal",
         subtitle: "ESPRIT 2023",
         task1: "Gestion des offres et achats pour projet de recyclage",
@@ -162,7 +165,7 @@ export const translations = {
       description:
         "Full-Stack Developer passionate about system architecture and modern technologies. Specialized in Spring Boot, Angular, ReactJS and DevOps.",
       yearsStudy: "3+ years of study",
-      internships: "3 internships",
+      internships: "4 internships",
       contactMe: "Contact Me",
       downloadCV: "Download CV",
       contact: "Contact",
@@ -229,11 +232,20 @@ export const translations = {
         task1: "Design and implementation of CRUD functionalities",
         task2: "Back-office development for efficient data management",
       },
+      exp4: {
+        period: "Feb. 2022 - June 2022",
+        title: "License Final Year Internship",
+        company: "CGI Studio",
+        client: "CGI Studio",
+        task1: "Designed and developed 'Attack Of Zombie', an immersive 3D mobile game",
+        task2: "3D modeling of characters and environments",
+        task3: "Implementation of gameplay and game mechanics",
+      },
     },
     // Projects Section
     projects: {
       sectionTitle: "Achievements",
-      title: "Selected Projects",
+      title: "Academic Projects",
       project1: {
         title: "DevOps CI/CD Project",
         subtitle: "Microservices Architecture • ESPRIT 2024",
@@ -248,12 +260,6 @@ export const translations = {
         task2: "Spring Security for advanced access management",
       },
       project3: {
-        title: "Attack Of Zombie",
-        subtitle: "3D Mobile Game • CGI Studio 2022",
-        task1: "Design and development of an immersive 3D mobile game",
-        task2: "3D modeling and gameplay",
-      },
-      project4: {
         title: "Municipal Recycling Project",
         subtitle: "ESPRIT 2023",
         task1: "Management of offers and purchases for recycling project",

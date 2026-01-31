@@ -254,25 +254,55 @@ export default function Portfolio() {
 
             {/* RIGHT COLUMN */}
             <div className="space-y-6 opacity-0 animate-fadeInUp stagger-2">
-              {/* Photo */}
-              <div className="glass p-6 md:p-8 hover-lift">
-                <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-cyan-700 transform rotate-6"></div>
-                  <div className="relative w-full h-full overflow-hidden border-4 border-slate-950">
-                    <img
-                      src="/images/omar_cv_pic.PNG"
-                      alt="Omar Ben Fathallah"
-                      className="w-full h-full object-center transition-all duration-500"
-                    />
+              {/* Photo Card - Version Professionnelle */}
+              <div className="glass p-6 md:p-8 hover-lift group">
+                <div className="relative w-full max-w-xs mx-auto mb-2">
+                  {/* Gradient Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-cyan-700/20 blur-2xl"></div>
+                  
+                  {/* Photo Container */}
+                  <div className="relative">
+                    {/* Decorative Border */}
+                    <div className="absolute -inset-1 bg-gradient-to-br from-yellow-500 to-cyan-700 rounded-lg opacity-75 blur-sm"></div>
+                    
+                    {/* Image Wrapper */}
+                    <div className="relative bg-slate-950 rounded-lg overflow-hidden border-2 border-slate-800">
+                      <div className="aspect-square w-full">
+                        <img
+                          src="/images/omar_cv_pic.PNG"
+                          alt="Omar Ben Fathallah - Software Engineer"
+                          className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      
+                      {/* Overlay Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
                   </div>
                 </div>
-                <div className="text-center">
-                  <h3 className="font-playfair text-2xl font-bold text-slate-100">
-                    {t.hero.name} {t.hero.surname}
-                  </h3>
-                  <p className="text-yellow-500 font-dm-sans text-sm mt-2">
-                    {t.hero.title}
-                  </p>
+
+                {/* Profile Info */}
+                <div className="text-center space-y-1">
+                  <div>
+                    <h3 className="font-playfair text-2xl md:text-3xl font-bold text-slate-100 mb-1">
+                      {t.hero.name} {t.hero.surname}
+                    </h3>
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="h-px w-8 bg-yellow-500"></div>
+                      <p className="text-yellow-500 font-dm-sans text-sm uppercase tracking-wider">
+                        {t.hero.title}
+                      </p>
+                      <div className="h-px w-8 bg-yellow-500"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Status Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full">
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-xs text-yellow-500 font-dm-sans uppercase tracking-wider">
+                      {t.hero.available}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -377,7 +407,7 @@ export default function Portfolio() {
                 </div>
                 <div className="text-center">
                   <div className="text-3xl md:text-4xl font-playfair font-bold text-yellow-500">
-                    3
+                    4
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 mt-2 font-dm-sans uppercase tracking-wider">
                     {t.about.internships}
@@ -637,6 +667,54 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
+
+            {/* Experience 4 - CGI Studio */}
+            <div className="grid lg:grid-cols-12 gap-6 md:gap-8 group">
+              <div className="lg:col-span-4">
+                <div className="lg:sticky lg:top-32">
+                  <div className="text-xs md:text-sm text-yellow-500 uppercase tracking-widest font-dm-sans mb-2">
+                    {t.experience.exp4.period}
+                  </div>
+                  <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3">
+                    {t.experience.exp4.title}
+                  </h3>
+                  <p className="text-lg md:text-xl text-slate-400">
+                    {t.experience.exp4.company}
+                  </p>
+                  <p className="text-sm md:text-base text-slate-500 mt-1">
+                    {t.experience.exp4.client}
+                  </p>
+                </div>
+              </div>
+              <div className="lg:col-span-8">
+                <div className="glass rounded-none p-6 md:p-8 hover-lift border-l-4 border-purple-700">
+                  <ul className="space-y-3 md:space-y-4 text-sm md:text-base text-slate-300 font-dm-sans">
+                    <li className="flex gap-3 md:gap-4">
+                      <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-purple-500 mt-1 flex-shrink-0" />
+                      <span>{t.experience.exp4.task1}</span>
+                    </li>
+                    <li className="flex gap-3 md:gap-4">
+                      <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-purple-500 mt-1 flex-shrink-0" />
+                      <span>{t.experience.exp4.task2}</span>
+                    </li>
+                    <li className="flex gap-3 md:gap-4">
+                      <ArrowRight className="w-4 md:w-5 h-4 md:h-5 text-purple-500 mt-1 flex-shrink-0" />
+                      <span>{t.experience.exp4.task3}</span>
+                    </li>
+                  </ul>
+                  <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
+                    {["C#", "Unity", "Blender", "Animation 3D"].map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 md:px-3 py-1 md:py-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-500 text-xs font-dm-sans uppercase tracking-wider"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -654,8 +732,8 @@ export default function Portfolio() {
             <div className="h-1 w-20 md:w-24 bg-yellow-500"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {/* Project 1 */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Project 1 - DevOps */}
             <div className="glass rounded-none p-6 md:p-10 hover-lift group cursor-pointer">
               <div className="flex justify-between items-start mb-6">
                 <div className="w-12 h-12 md:w-16 md:h-16 border border-yellow-500 flex items-center justify-center text-yellow-500 font-playfair text-xl md:text-2xl font-bold">
@@ -683,7 +761,7 @@ export default function Portfolio() {
                   <span>{t.projects.project1.task3}</span>
                 </li>
               </ul>
-              <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
+              <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
                 {[
                   "Jenkins",
                   "Docker",
@@ -693,7 +771,7 @@ export default function Portfolio() {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs text-slate-400 font-dm-sans uppercase tracking-wider"
+                    className="px-2.5 md:px-3 py-1 md:py-1.5 bg-slate-500/10 border border-slate-500/20 text-yellow-500 text-xs font-dm-sans uppercase tracking-wider"
                   >
                     {tech}
                   </span>
@@ -701,7 +779,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Project 2 */}
+            {/* Project 2 - Plateforme stages */}
             <div className="glass rounded-none p-6 md:p-10 hover-lift group cursor-pointer">
               <div className="flex justify-between items-start mb-6">
                 <div className="w-12 h-12 md:w-16 md:h-16 border border-cyan-700 flex items-center justify-center text-cyan-500 font-playfair text-xl md:text-2xl font-bold">
@@ -735,7 +813,7 @@ export default function Portfolio() {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs text-slate-400 font-dm-sans uppercase tracking-wider"
+                    className="px-2.5 md:px-3 py-1 md:py-1.5 bg-slate-500/10 border border-slate-500/20 text-cyan-500 text-xs font-dm-sans uppercase tracking-wider"
                   >
                     {tech}
                   </span>
@@ -743,15 +821,15 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Project 3 */}
+            {/* Project 3 - Recyclage */}
             <div className="glass rounded-none p-6 md:p-10 hover-lift group cursor-pointer">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 md:w-16 md:h-16 border border-purple-700 flex items-center justify-center text-purple-500 font-playfair text-xl md:text-2xl font-bold">
+                <div className="w-12 h-12 md:w-16 md:h-16 border border-green-700 flex items-center justify-center text-green-500 font-playfair text-xl md:text-2xl font-bold">
                   03
                 </div>
-                <Code className="w-6 md:w-8 h-6 md:h-8 text-purple-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <Code className="w-6 md:w-8 h-6 md:h-8 text-green-500 opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
-              <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-purple-500 transition-colors">
+              <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-green-500 transition-colors">
                 {t.projects.project3.title}
               </h3>
               <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
@@ -759,55 +837,19 @@ export default function Portfolio() {
               </p>
               <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
                 <li className="flex gap-2 md:gap-3">
-                  <span className="text-purple-500">→</span>
+                  <span className="text-green-500">→</span>
                   <span>{t.projects.project3.task1}</span>
                 </li>
                 <li className="flex gap-2 md:gap-3">
-                  <span className="text-purple-500">→</span>
+                  <span className="text-green-500">→</span>
                   <span>{t.projects.project3.task2}</span>
-                </li>
-              </ul>
-              <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
-                {["C#", "Unity", "Blender", "Animation 3D"].map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs text-slate-400 font-dm-sans uppercase tracking-wider"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Project 4 */}
-            <div className="glass rounded-none p-6 md:p-10 hover-lift group cursor-pointer">
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 md:w-16 md:h-16 border border-green-700 flex items-center justify-center text-green-500 font-playfair text-xl md:text-2xl font-bold">
-                  04
-                </div>
-                <Code className="w-6 md:w-8 h-6 md:h-8 text-green-500 opacity-50 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-3 group-hover:text-green-500 transition-colors">
-                {t.projects.project4.title}
-              </h3>
-              <p className="text-sm md:text-base text-slate-400 mb-4 font-dm-sans">
-                {t.projects.project4.subtitle}
-              </p>
-              <ul className="space-y-2 md:space-y-3 mb-6 text-sm md:text-base text-slate-300 font-dm-sans">
-                <li className="flex gap-2 md:gap-3">
-                  <span className="text-green-500">→</span>
-                  <span>{t.projects.project4.task1}</span>
-                </li>
-                <li className="flex gap-2 md:gap-3">
-                  <span className="text-green-500">→</span>
-                  <span>{t.projects.project4.task2}</span>
                 </li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-800">
                 {["JavaFX", "Symfony", "Bootstrap", "PHP"].map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs text-slate-400 font-dm-sans uppercase tracking-wider"
+                    className="px-2.5 md:px-3 py-1 md:py-1.5 bg-slate-500/10 border border-slate-500/20 text-green-500 text-xs font-dm-sans uppercase tracking-wider"
                   >
                     {tech}
                   </span>
